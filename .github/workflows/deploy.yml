@@ -1,0 +1,38 @@
+name: Build and Deploy Angular App to IIS
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment on push to the main branch
+
+jobs:
+  build:
+    runs-on: windows-latest  # or use windows-latest if you want to use Windows Runner
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2  # Checkout the repository
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20.x'  # Set the Node.js version you want to use
+
+    - name: Install Dependencies
+      run: npm install  # Install Angular dependencies
+
+    - name: Build Angular App
+      run: npm run build --prod  # Build the Angular app for production
+
+    - name: Archive Build Files
+      run: |
+        mkdir -p build-artifacts
+        cp -r dist/* build-artifacts/  # Copy build output to a new folder
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: angular-build
+        path: build-artifacts  # Upload the build artifacts to GitHub
+
+
