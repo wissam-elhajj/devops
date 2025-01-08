@@ -3,7 +3,7 @@ name: Build and Deploy Angular App to IIS
 on:
   push:
     branches:
-      - main  # Trigger deployment on push to the main branch
+      - master  # Trigger deployment on push to the main branch
 
 jobs:
   build:
