@@ -30,7 +30,7 @@ jobs:
         cp -r dist/* build-artifacts/  # Copy build output to a new folder
 
     - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: angular-build
         path: build-artifacts  # Upload the build artifacts to GitHub
