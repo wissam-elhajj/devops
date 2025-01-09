@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: angular-build
-        path: build-artifacts  # Upload the build artifacts to GitHub
+        path: build-artifacts/  # Upload the build artifacts to GitHub
 
   deploy:
     runs-on: windows-latest  # IIS servers are typically Windows-based
