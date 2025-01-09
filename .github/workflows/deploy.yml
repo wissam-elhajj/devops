@@ -51,7 +51,7 @@ jobs:
     - name: Deploy via FTP to IIS
       uses: SamKirkland/FTP-Deploy-Action@v4.3.3  # Use the correct latest version of the action
       with:
-        host: 'ftp://108.181.161.179'  # Your FTP server address
+        ftp-server: 'ftp://108.181.161.179'  # Your FTP server address
         username: ${{ secrets.FTP_USERNAME }}  # Your FTP username
         password: ${{ secrets.FTP_PASSWORD }}  # Your FTP password
         port: 21  # Default FTP port
