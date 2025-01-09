@@ -51,7 +51,7 @@ jobs:
     - name: Deploy to IIS
       run: |
         # Make sure to replace with your actual IIS server details
-        $server_ip = '108.181.161.179:1097'
+        $server_ip = '108.181.161.179'
         $username = 'administrator'
         $password = '@hgTuw$564'
         $target_path = 'C:\IRIS5\site.cicd'
