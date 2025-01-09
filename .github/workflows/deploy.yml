@@ -55,17 +55,24 @@ jobs:
         $username = 'administrator'
         $password = '@hgTuw$564'
         $target_path = 'C:\IRIS5\site.cicd'
-
+        $Build_Path = './angular-build'
+        
         # Deploy the artifact using PowerShell via WinRM or any other method
-        # In this case, we use PowerShell Remoting (WinRM) for IIS Deployment
-
         $credential = New-Object System.Management.Automation.PSCredential ($username, (ConvertTo-SecureString $password -AsPlainText -Force))
-        Invoke-Command -ComputerName $server_ip -Credential $credential -ScriptBlock {
-          # Clean the existing directory on IIS
-          Remove-Item -Recurse -Force $using:target_path\*
 
-          # Copy new build files to IIS folder
-          Copy-Item -Recurse -Force $using:Build_Path\* $using:target_path
-        }
+        # Use Invoke-Command with -ArgumentList to pass $Build_Path to the remote session
+        Invoke-Command -ComputerName $server_ip -Credential $credential -ScriptBlock {
+            param (
+                $Build_Path,  # Accept Build_Path as a parameter
+                $target_path  # Accept target_path as a parameter
+            )
+            
+            # Clean the existing directory on IIS
+            Remove-Item -Recurse -Force $target_path\*
+
+            # Copy new build files to IIS folder
+            Copy-Item -Recurse -Force $Build_Path\* $target_path
+        } -ArgumentList $Build_Path, $target_path
+
       env:
         Build_Path: ./angular-build  # Local path to the downloaded artifact
