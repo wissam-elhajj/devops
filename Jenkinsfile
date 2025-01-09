@@ -17,6 +17,7 @@ pipeline {
             steps {
                 script {
                     // Install Node.js dependencies if working with an Angular project
+					bat  'rm -rf node_modules'
                     bat  'npm install'
                 }
             }
