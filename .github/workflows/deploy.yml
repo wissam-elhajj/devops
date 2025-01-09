@@ -47,32 +47,15 @@ jobs:
         name: angular-build
         path: build-artifacts/angular-build
 
-    # Deploy the artifact to IIS Server
-    - name: Deploy to IIS
-      run: |
-        # Make sure to replace with your actual IIS server details
-        $server_ip = '108.181.161.179'
-        $username = 'administrator'
-        $password = '@hgTuw$564'
-        $target_path = 'C:\IRIS5\site.cicd'
-        $Build_Path = './angular-build'
-        
-        # Deploy the artifact using PowerShell via WinRM or any other method
-        $credential = New-Object System.Management.Automation.PSCredential ($username, (ConvertTo-SecureString $password -AsPlainText -Force))
-
-        # Use Invoke-Command with -ArgumentList to pass $Build_Path to the remote session
-        Invoke-Command -ComputerName $server_ip -Credential $credential -ScriptBlock {
-            param (
-                $Build_Path,  # Accept Build_Path as a parameter
-                $target_path  # Accept target_path as a parameter
-            )
-            
-            # Clean the existing directory on IIS
-            Remove-Item -Recurse -Force $target_path\*
-
-            # Copy new build files to IIS folder
-            Copy-Item -Recurse -Force $Build_Path\* $target_path
-        } -ArgumentList $Build_Path, $target_path
-
-      env:
-        Build_Path: ./angular-build  # Local path to the downloaded artifact
+    # Step 6: Deploy to IIS via FTP
+    - name: Deploy via FTP to IIS
+      uses: sebastianpopp/ftp-action@v1
+      with:
+        host: 'ftp://108.181.161.179'  # Your FTP server address
+        username: ${{ secrets.FTP_USERNAME }}  # Your FTP username
+        password: ${{ secrets.FTP_PASSWORD }}  # Your FTP password
+        port: 21  # Default FTP port
+        local-dir: ./angular-build  # Path to the downloaded build files
+        remote-dir: /IRIS5/site.cicd  # Target folder on the IIS server
+          
+          
