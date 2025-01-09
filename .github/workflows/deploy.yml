@@ -34,6 +34,11 @@ jobs:
       with:
         name: angular-build
         path: build-artifacts/  # Upload the build artifacts to GitHub
+        
+    - name: List uploaded artifacts
+      run: |
+        echo "Listing artifacts uploaded in this job:"
+        ls -R build-artifacts/    
 
   deploy:
     runs-on: windows-latest  # IIS servers are typically Windows-based
@@ -48,7 +53,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: angular-build
-        path: ./angular-build
+        path: build-artifacts/angular-build
 
     # Deploy the artifact to IIS Server
     - name: Deploy to IIS
