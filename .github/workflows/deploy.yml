@@ -47,6 +47,11 @@ jobs:
     # Checkout the repository code
     - name: Checkout Repository
       uses: actions/checkout@v2
+      
+    - name: Verify workspace contents
+        run: |
+          echo "Listing workspace contents:"
+          ls -R ./  # List all files to check for artifacts
 
     # Download the build artifact
     - name: Download Angular Build Artifact
