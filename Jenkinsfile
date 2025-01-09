@@ -18,7 +18,6 @@ pipeline {
                 script {
                     // Install Node.js dependencies if working with an Angular project
                     bat  'npm install'
-					bat  'npm install @angular-devkit/build-angular --save-dev'
                 }
             }
         }
@@ -27,7 +26,7 @@ pipeline {
             steps {
                 script {
                     // Build the Angular project
-                    bat 'npm run build --prod'
+                    bat 'ng build'
                 }
             }
         }
