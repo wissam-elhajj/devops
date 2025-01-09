@@ -49,7 +49,7 @@ jobs:
 
     # Step 6: Deploy to IIS via FTP
     - name: Deploy via FTP to IIS
-      uses: sebastianpopp/ftp-action@v1
+      uses: SamKirkland/FTP-Deploy-Action@v5  # Use the correct latest version of the action
       with:
         host: 'ftp://108.181.161.179'  # Your FTP server address
         username: ${{ secrets.FTP_USERNAME }}  # Your FTP username
