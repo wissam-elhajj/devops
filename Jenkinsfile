@@ -15,23 +15,27 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                script {
-                    // Install Node.js dependencies if working with an Angular project
-					bat  'rm -rf node_modules'
-                    bat  'npm install'
-                }
+                // Run npm install to install Angular dependencies
+                bat 'npm install'
             }
         }
 
-        stage('Build') {
+        stage('Build Angular App') {
             steps {
-                script {
-                    // Build the Angular project
-                    bat 'ng build'
-                }
+                // Run the build command for Angular in production mode
+                bat 'npm run build --prod'
             }
         }
-
+		
+		stage('Archive Build Files') {
+            steps {
+                // Copy build output (dist folder) to an artifacts folder
+                bat 'mkdir build-artifacts'
+                bat 'xcopy /E /I /H /Y dist\\* build-artifacts\\'
+            }
+        }
+		
+		
         stage('Deploy to IIS') {
             steps {
                 script {
@@ -43,9 +47,15 @@ pipeline {
     }
 
     post {
+		success {
+            echo 'Build and Deploy pipeline succeeded!'
+        }
         always {
             // Clean up after the pipeline finishes
             echo 'Cleaning up...'
+        }
+		failure {
+            echo 'Build and Deploy pipeline failed!'
         }
     }
 }
