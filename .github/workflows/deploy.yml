@@ -48,7 +48,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: angular-build
-        path: ./angular-build
+        path: C:\Users\a.abboud\Desktop\artifact
 
     # Deploy the artifact to IIS Server
     - name: Deploy to IIS
@@ -71,4 +71,4 @@ jobs:
           Copy-Item -Recurse -Force $using:Build_Path\* $using:target_path
         }
       env:
-        Build_Path: ./angular-build  # Local path to the downloaded artifact
+        Build_Path: C:\Users\a.abboud\Desktop\artifact  # Local path to the downloaded artifact
