@@ -35,4 +35,40 @@ jobs:
         name: angular-build
         path: build-artifacts  # Upload the build artifacts to GitHub
 
+  deploy:
+    runs-on: windows-latest  # IIS servers are typically Windows-based
 
+    steps:
+    # Checkout the repository code
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    # Download the build artifact
+    - name: Download Angular Build Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: angular-build
+        path: ./angular-build
+
+    # Deploy the artifact to IIS Server
+    - name: Deploy to IIS
+      run: |
+        # Make sure to replace with your actual IIS server details
+        $server_ip = '108.181.161.179:1097'
+        $username = 'administrator'
+        $password = '@hgTuw$564'
+        $target_path = 'C:\IRIS5\site.cicd' #C:\inetpub\wwwroot\my-angular-app' Path on IIS server
+
+        # Deploy the artifact using PowerShell via WinRM or any other method
+        # In this case, we use PowerShell Remoting (WinRM) for IIS Deployment
+
+        $credential = New-Object System.Management.Automation.PSCredential ($username, (ConvertTo-SecureString $password -AsPlainText -Force))
+        Invoke-Command -ComputerName $server_ip -Credential $credential -ScriptBlock {
+          # Clean the existing directory on IIS
+          Remove-Item -Recurse -Force $using:target_path\*
+
+          # Copy new build files to IIS folder
+          Copy-Item -Recurse -Force $using:Build_Path\* $using:target_path
+        }
+      env:
+        Build_Path: ./angular-build  # Local path to the downloaded artifact
