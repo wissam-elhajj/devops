@@ -6,7 +6,7 @@ on:
       - master  # Trigger deployment on push to the main branch
 
 jobs:
-  build:
+  CICD:
     runs-on: windows-latest  # or use windows-latest if you want to use Windows Runner
 
     steps:
@@ -49,7 +49,7 @@ jobs:
 
     # Step 6: Deploy to IIS via FTP
     - name: Deploy via FTP to IIS
-      uses: SamKirkland/FTP-Deploy-Action@v5  # Use the correct latest version of the action
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.3  # Use the correct latest version of the action
       with:
         host: 'ftp://108.181.161.179'  # Your FTP server address
         username: ${{ secrets.FTP_USERNAME }}  # Your FTP username
