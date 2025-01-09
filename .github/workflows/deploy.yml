@@ -40,19 +40,6 @@ jobs:
         echo "Listing artifacts uploaded in this job:"
         ls -R build-artifacts/    
 
-  deploy:
-    runs-on: windows-latest  # IIS servers are typically Windows-based
-
-    steps:
-    # Checkout the repository code
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-      
-    - name: List uploaded artifacts before deploy
-      run: |
-        echo "Listing artifacts uploaded in this job:"
-        ls -R build-artifacts/    
-
     # Download the build artifact
     - name: Download Angular Build Artifact
       uses: actions/download-artifact@v3
