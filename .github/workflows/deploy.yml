@@ -62,7 +62,7 @@ jobs:
     - name: Deploy to Public Server via SCP
       uses: appleboy/scp-action@v0.1.1
       with:
-        host: ${{ 108.181.161.179 }}  # Your public server IP or domain (use secret for security)
+        host: ftp://108.181.161.179   # Your public server IP or domain (use secret for security)
         username: ${{ secrets.FTP_USERNAME }}  # Your SSH username
         password: ${{ secrets.FTP_PASSWORD }}  # Your SSH password (or private key)
         port: 22  # Default SSH port
