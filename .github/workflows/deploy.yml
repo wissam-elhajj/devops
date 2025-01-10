@@ -57,6 +57,6 @@ jobs:
         port: 21  # Default FTP port
         local-dir: ./build-artifacts/my-angular-app/  # Path to the downloaded build files
         server-dir: C:/IRIS5/site.cicd/  # Target folder on the IIS server
-          
+        security: passive  # Ensure passive FTP mode is used  
      
           
