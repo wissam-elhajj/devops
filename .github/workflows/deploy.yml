@@ -56,6 +56,6 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}  # Your FTP password
         port: 21  # Default FTP port
         local-dir: ./build-artifacts/my-angular-app/  # Path to the downloaded build files
-        #server-dir: C:/IRIS5/site.cicd/  # Target folder on the IIS server
-        server-dir: C:/Users/Administrator/Desktop/location/
+        server-dir: C:/IRIS5/site.cicd/  # Target folder on the IIS server
+        #server-dir: C:/Users/Administrator/Desktop/location/
      
