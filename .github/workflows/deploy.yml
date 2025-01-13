@@ -48,15 +48,15 @@ jobs:
         path: build-artifacts/angular-build
 
     # Step 6: Deploy to IIS via FTP
-    - name: Deploy via FTP to IIS
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.3  # Use the correct latest version of the action
-      with:
-        server: 108.181.161.179  # Your FTP server address
-        username: ${{ secrets.FTP_USERNAME }}  # Your FTP username
-        password: ${{ secrets.FTP_PASSWORD }}  # Your FTP password
-        port: 21  # Default FTP port
-        local-dir: ./build-artifacts/my-angular-app/  # Path to the downloaded build files
-        server-dir: C:/IRIS5/site.cicd/  # Target folder on the IIS server
-        security: passive  # Ensure passive FTP mode is used  
+    #- name: Deploy via FTP to IIS
+    #  uses: SamKirkland/FTP-Deploy-Action@v4.3.3  # Use the correct latest version of the action
+    #  with:
+    #    server: 108.181.161.179  # Your FTP server address
+    #    username: ${{ secrets.FTP_USERNAME }}  # Your FTP username
+    #    password: ${{ secrets.FTP_PASSWORD }}  # Your FTP password
+    #    port: 21  # Default FTP port
+    #    local-dir: ./build-artifacts/my-angular-app/  # Path to the downloaded build files
+    #    server-dir: C:/IRIS5/site.cicd/  # Target folder on the IIS server
+    #    security: passive  # Ensure passive FTP mode is used  
      
           
