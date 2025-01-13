@@ -58,6 +58,4 @@ jobs:
         local-dir: ./build-artifacts/my-angular-app/  # Path to the downloaded build files
         #server-dir: C:/IRIS5/site.cicd/  # Target folder on the IIS server
         server-dir: C:/Users/Administrator/Desktop/location/
-        security: passive  # Ensure passive FTP mode is used  
      
-          
